@@ -23,19 +23,29 @@ fun operation(oprd: String, index: Int, parts: List<String>, deapth: Int): Doubl
     if (deapth>maxDeapth)
         maxDeapth = deapth
 
-    if (parts[index+1] in opers)
+    if (parts[index+1] in opers){
+        print("(")
         op1 = operation(parts[index+1], index+1, parts, deapth+1)
-    else if(parts[index+1].toDouble()>=0)
+        print(")")
+    }
+    else if(parts[index+1].toDouble()>=0){
         op1 = parts[index+1].toDouble()
+        print("$op1")
+    }
     else {
         println("Wrong expression")
         return Double.NaN
     }
 
-    if (parts[index+2 + (maxDeapth-deapth)*2] in opers)
+    if (parts[index+2 + (maxDeapth-deapth)*2] in opers){
+        print(" $oprd (")
         op2 = operation(parts[index+2+ (maxDeapth-deapth)*2], index+2+ (maxDeapth-deapth)*2, parts, deapth+1)
-    else if(parts[index+2+ (maxDeapth-deapth)*2].toDouble() >= 0)
+        print(")")
+    }
+    else if(parts[index+2+ (maxDeapth-deapth)*2].toDouble() >= 0){
         op2 = parts[index+2+ (maxDeapth-deapth)*2].toDouble()
+        print(" $oprd $op2")
+    }
     else {
         println("Wrong expression")
         return Double.NaN
@@ -44,10 +54,10 @@ fun operation(oprd: String, index: Int, parts: List<String>, deapth: Int): Doubl
     if (lastIndex <= (index+2 + (maxDeapth-deapth)*2))
         lastIndex = index+3 + (maxDeapth-deapth)*2
     when (oprd) {
-        "+" -> return add(op1, op2)
-        "-" -> return sub(op1, op2)
-        "*" -> return mul(op1, op2)
-        "/" -> return div(op1, op2)
+        "+" ->  return add(op1, op2)
+        "-" ->  return sub(op1, op2)
+        "*" ->  return mul(op1, op2)
+        "/" ->  return div(op1, op2)
     }
     println("Wrong expression")
     return Double.NaN
@@ -67,7 +77,7 @@ fun main(args: Array<String>) {
             if (lastIndex < parts.size)
                 println("Wrong expression")
             else
-                println(result)
+                println(" = $result")
         }
     }
     catch (e: Exception){
